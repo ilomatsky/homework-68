@@ -1,6 +1,6 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {addTask} from './tasksSlice';
+import {addTask, fetchTasks} from './tasksSlice';
 
 const TaskForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -10,23 +10,33 @@ const TaskForm: React.FC = () => {
     setNewTask(e.target.value);
   };
 
-  const handleAddTask = () => {
+  const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (newTask.trim() !== '') {
       dispatch(addTask({title: newTask}));
       setNewTask('');
+      dispatch(fetchTasks());
     }
   };
 
   return (
-    <div>
+    <form
+      className="container col-6"
+      onSubmit={handleAddTask}>
       <h2>TODO list</h2>
-      <input
-        type="text"
-        value={newTask}
-        required
-        onChange={handleInputChange}/>
-      <button onClick={handleAddTask}>Add</button>
-    </div>
+      <div className="input-group mb-3">
+        <input
+          className="form-control"
+          type="text"
+          value={newTask}
+          required
+          onChange={handleInputChange}/>
+        <button
+          className="btn btn-primary"
+          type="submit">Add</button>
+      </div>
+    </form>
   );
 };
 

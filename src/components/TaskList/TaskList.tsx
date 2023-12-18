@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchTasks, updateTask, deleteTask} from '../TaskForm/tasksSlice';
 
@@ -19,13 +19,21 @@ const TaskList: React.FC = () => {
   };
 
   return (
-    <div>
-      <ul>
+    <div className="container col-6">
+      <ul className="list-group">
         {tasks.map((task: any) => (
-          <li key={task.id}>
-            <input type="checkbox" checked={task.status} onChange={() => handleCheckboxChange(task.id, task.status)}/>
+          <li
+            key={task.id}
+            className="list-group-item d-flex justify-content-between align-items-center">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              checked={task.status}
+              onChange={() => handleCheckboxChange(task.id, task.status)}/>
             <span>{task.title}</span>
-            <button onClick={() => handleDelete(task.id)}>Delete</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => handleDelete(task.id)}>Delete</button>
           </li>
         ))}
       </ul>

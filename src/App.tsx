@@ -1,15 +1,13 @@
-import React from 'react';
-import TaskList from './components/TaskList';
-import TaskForm from './components/TaskForm';
+import TaskForm from './components/TaskForm/TaskForm';
+import TaskList from './components/TaskList/TaskList';
 import './App.css';
 
-const App: React.FC = () => {
+const App = () => {
   return (
-    <div>
-      <h1>TODO App</h1>
-      <TaskList/>
+    <>
       <TaskForm/>
-    </div>
+      <TaskList/>
+    </>
   );
 };
 

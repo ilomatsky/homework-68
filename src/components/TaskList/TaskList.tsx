@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchTasks, updateTask, deleteTask} from '../TaskForm/tasksSlice';
+import {Task} from '../../types';
 
 const TaskList: React.FC = () => {
   const dispatch = useDispatch();
-  const tasks = useSelector((state: any) => state.tasks);
+  const tasks = useSelector((state: { tasks: Task[] }) => state.tasks);
 
   useEffect(() => {
     dispatch(fetchTasks());
@@ -21,7 +22,7 @@ const TaskList: React.FC = () => {
   return (
     <div className="container col-6">
       <ul className="list-group">
-        {tasks.map((task: any) => (
+        {tasks.map((task: Task) => (
           <li
             key={task.id}
             className="list-group-item d-flex justify-content-between align-items-center">
@@ -33,7 +34,8 @@ const TaskList: React.FC = () => {
             <span>{task.title}</span>
             <button
               className="btn btn-danger"
-              onClick={() => handleDelete(task.id)}>Delete</button>
+              onClick={() => handleDelete(task.id)}>Delete
+            </button>
           </li>
         ))}
       </ul>
